@@ -46,3 +46,10 @@ living_cost = (ny_living_cost %>% html_nodes(css = "table"))[[2]] %>%
   as_tibble() 
 ```
 
+## HP_SS cast
+
+Want the names!
+```{r}
+
+```
+
