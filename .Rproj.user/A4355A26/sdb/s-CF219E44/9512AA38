@@ -1,0 +1,29 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1508782186658.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "9512AA38",
+    "lastKnownWriteTime" : 6,
+    "last_content_update" : 1508782186658,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "cacheKey" : "A149E7DA",
+        "caption" : "toothbrush_df",
+        "contentUrl" : "grid_resource/gridviewer.html?env=&obj=toothbrush_df&cache_key=A149E7DA",
+        "displayedObservations" : 10,
+        "environment" : "",
+        "object" : "toothbrush_df",
+        "preview" : 0,
+        "totalObservations" : 10,
+        "variables" : 2
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_dataframe"
+}

@@ -37,6 +37,8 @@ table_marj = (drug_use_xml %>% html_nodes(css = "table"))[[1]] %>% #[[1]] first 
   as_tibble()
 ```
 
+### NY living cost table
+
 ```{r practice}
 ny_living_cost = read_html("https://www.bestplaces.net/cost_of_living/city/new_york/new_york")
 ny_living_cost %>%
@@ -50,6 +52,32 @@ living_cost = (ny_living_cost %>% html_nodes(css = "table"))[[2]] %>%
 
 Want the names!
 ```{r}
+hpss_html = read_html("http://www.imdb.com/title/tt0241527/")
 
+hpss_cast = hpss_html %>%
+  html_nodes(css = ".itemprop .itemprop") %>%
+  html_text()
+```
+
+
+### Toothbrush reviews
+
+Deantal hygiene;;ksdf
+
+```{r}
+toothbrush_xml = read_html("https://www.amazon.com/Philips-Sonicare-rechargeable-toothbrush-HX6211/product-reviews/B00YAR7ZFM/ref=cm_cr_arp_d_viewopt_srt?ie=UTF8&reviewerType=all_reviews&sortBy=recent&pageNumber=1")
+
+toothbrush_titles = toothbrush_xml %>%
+  html_nodes(css = "#cm_cr-review_list .a-color-base") %>% #using SelectorGadget
+  html_text()
+
+toothbrush_stars = toothbrush_xml %>%
+  html_nodes(css = "#cm_cr-review_list .review-rating") %>% #using SelectorGadget
+  html_text()
+
+toothbrush_df = data_frame(
+  title = toothbrush_titles,
+  stars = toothbrush_stars
+)
 ```
 

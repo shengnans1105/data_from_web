@@ -1,0 +1,29 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1508780927736.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "F7F18A8F",
+    "lastKnownWriteTime" : 4325804800,
+    "last_content_update" : 1508780927736,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "cacheKey" : "BDC67D3A",
+        "caption" : "living_cost",
+        "contentUrl" : "grid_resource/gridviewer.html?env=&obj=living_cost&cache_key=BDC67D3A",
+        "displayedObservations" : 8,
+        "environment" : "",
+        "object" : "living_cost",
+        "preview" : 0,
+        "totalObservations" : 8,
+        "variables" : 3
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_dataframe"
+}
