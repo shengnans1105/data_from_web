@@ -19,3 +19,59 @@ theme_set(theme_bw())
 theme_update(legend.position = "bottom")
 ```
 
+## Pulse
+
+```{r}
+pulse_data = read_sas("./data/public_pulse_data.sas7bdat") %>%
+  clean_names() %>%
+  gather(key = visit, value = bdi, bdiscore_bl:bdiscore_12m) %>%
+  mutate(visit = str_replace(visit, "bdiscore_", ""),
+         visit = str_replace(visit, "bl", "00m"),
+         visit = fct_relevel(visit, str_c(c("00", "01", "06", "12"), "m"))) %>%
+  arrange(id, visit)
+```
+
+## NSDUH
+
+```{r}
+url = "http://samhda.s3-us-gov-west-1.amazonaws.com/s3fs-public/field-uploads/2k15StateFiles/NSDUHsaeShortTermCHG2015.htm"
+drug_use_xml = read_html(url)
+
+table_marj = (drug_use_xml %>% html_nodes(css = "table"))[[1]] %>%
+  html_table() %>%
+  .[-1,] %>%
+  as_tibble()
+```
+
+Tidy data.
+
+```{r}
+data_marj = 
+  table_marj %>%
+  select(-contains("P Value")) %>%
+  gather(key = key, value = percent, -State) %>%
+  separate(key, into = c("age", "year"), sep = "\\(") %>% # \\ state this is a special character, ignore previous (). 
+  mutate(year = str_sub(year, 1, -2), # start from position 1 to the position -2
+         percent = str_replace(percent, "[a-z]", ""),
+         percent = as.numeric(percent)) %>%
+  filter(!(State %in% c("Total U.S.", "Northeast", "Midwest", "South", "West")))
+```
+
+Make a plot
+
+```{r}
+data_marj %>%
+  filter(age == "12-17") %>% 
+  mutate(State = fct_reorder(State, percent)) %>% # reorder State by the value of percent
+  ggplot(aes(x = State, y = percent, color = year)) + 
+    geom_point() + 
+    theme(axis.text.x = element_text(angle = 90, hjust = 1))
+```
+
+```{r}
+# check the order of State which is defined by the value of percent
+data_marj %>%
+  filter(age == "12-17") %>% 
+  mutate(State = fct_reorder(State, percent)) %>% pull(State) %>% as.numeric()
+```
+
