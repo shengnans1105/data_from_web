@@ -85,7 +85,6 @@ toothbrush_df = data_frame(
 ### Water use data
 
 Getting water data via the API
-
 ```{r}
 nyc_water = GET("https://data.cityofnewyork.us/resource/waf7-5gvc.csv") %>% 
   content("parsed")
@@ -97,5 +96,22 @@ nyc_water = GET("https://data.cityofnewyork.us/resource/waf7-5gvc.json") %>%
   content("text") %>%
   jsonlite::fromJSON() %>%
   as_tibble()
+```
+
+### BRFSS
+
+```{r}
+brfss = 
+  GET("https://chronicdata.cdc.gov/api/views/hn4x-zwk7/rows.csv?accessType=DOWNLOAD") %>% 
+  content("parsed")
+```
+
+### Catch tge pokemon (data)
+
+```{r}
+poke = GET("http://pokeapi.co/api/v2/pokemon/1") %>%
+  content()
+names(poke)
+class(poke$name)
 ```
 
