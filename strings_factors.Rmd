@@ -1,0 +1,21 @@
+---
+title: "Strings and Factors"
+author: "Shengnan Sun"
+date: "2017/10/25"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(tidyverse)
+library(rvest)
+library(janitor)
+library(haven)
+
+library(stringr)
+library(forcats)
+theme_set(theme_bw())
+theme_update(legend.position = "bottom")
+```
+
