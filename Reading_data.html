@@ -124,27 +124,6 @@ $(document).ready(function () {
 </div>
 
 
-<pre class="r"><code>library(tidyverse)</code></pre>
-<pre><code>## Loading tidyverse: ggplot2
-## Loading tidyverse: tibble
-## Loading tidyverse: tidyr
-## Loading tidyverse: readr
-## Loading tidyverse: purrr
-## Loading tidyverse: dplyr</code></pre>
-<pre><code>## Conflicts with tidy packages ----------------------------------------------</code></pre>
-<pre><code>## filter(): dplyr, stats
-## lag():    dplyr, stats</code></pre>
-<pre class="r"><code>library(rvest)</code></pre>
-<pre><code>## Loading required package: xml2</code></pre>
-<pre><code>## 
-## Attaching package: 'rvest'</code></pre>
-<pre><code>## The following object is masked from 'package:purrr':
-## 
-##     pluck</code></pre>
-<pre><code>## The following object is masked from 'package:readr':
-## 
-##     guess_encoding</code></pre>
-<pre class="r"><code>library(httr)</code></pre>
 <div id="scraping" class="section level2">
 <h2>Scraping</h2>
 <div id="nsduh-table" class="section level3">
@@ -221,6 +200,62 @@ toothbrush_df = data_frame(
   title = toothbrush_titles,
   stars = toothbrush_stars
 )</code></pre>
+</div>
+</div>
+<div id="api" class="section level2">
+<h2>API</h2>
+<div id="water-use-data" class="section level3">
+<h3>Water use data</h3>
+<p>Getting water data via the API</p>
+<pre class="r"><code>nyc_water = GET(&quot;https://data.cityofnewyork.us/resource/waf7-5gvc.csv&quot;) %&gt;% 
+  content(&quot;parsed&quot;)</code></pre>
+<pre><code>## Parsed with column specification:
+## cols(
+##   new_york_city_population = col_integer(),
+##   nyc_consumption_million_gallons_per_day = col_integer(),
+##   per_capita_gallons_per_person_per_day = col_integer(),
+##   year = col_integer()
+## )</code></pre>
+<p>Getting the same data using JSON</p>
+<pre class="r"><code>nyc_water = GET(&quot;https://data.cityofnewyork.us/resource/waf7-5gvc.json&quot;) %&gt;% 
+  content(&quot;text&quot;) %&gt;%
+  jsonlite::fromJSON() %&gt;%
+  as_tibble()</code></pre>
+</div>
+<div id="brfss" class="section level3">
+<h3>BRFSS</h3>
+<pre class="r"><code>brfss = 
+  GET(&quot;https://chronicdata.cdc.gov/api/views/hn4x-zwk7/rows.csv?accessType=DOWNLOAD&quot;) %&gt;% 
+  content(&quot;parsed&quot;)</code></pre>
+<pre><code>## Parsed with column specification:
+## cols(
+##   .default = col_character(),
+##   YearStart = col_integer(),
+##   YearEnd = col_integer(),
+##   Data_Value = col_double(),
+##   Data_Value_Alt = col_double(),
+##   Low_Confidence_Limit = col_double(),
+##   High_Confidence_Limit = col_double(),
+##   Sample_Size = col_integer()
+## )</code></pre>
+<pre><code>## See spec(...) for full column specifications.</code></pre>
+</div>
+<div id="catch-tge-pokemon-data" class="section level3">
+<h3>Catch tge pokemon (data)</h3>
+<pre class="r"><code>poke = GET(&quot;http://pokeapi.co/api/v2/pokemon/1&quot;) %&gt;%
+  content()
+names(poke)</code></pre>
+<pre><code>##  [1] &quot;forms&quot;                    &quot;abilities&quot;               
+##  [3] &quot;stats&quot;                    &quot;name&quot;                    
+##  [5] &quot;weight&quot;                   &quot;moves&quot;                   
+##  [7] &quot;sprites&quot;                  &quot;held_items&quot;              
+##  [9] &quot;location_area_encounters&quot; &quot;height&quot;                  
+## [11] &quot;is_default&quot;               &quot;species&quot;                 
+## [13] &quot;id&quot;                       &quot;order&quot;                   
+## [15] &quot;game_indices&quot;             &quot;base_experience&quot;         
+## [17] &quot;types&quot;</code></pre>
+<pre class="r"><code>class(poke$name)</code></pre>
+<pre><code>## [1] &quot;character&quot;</code></pre>
 </div>
 </div>
 

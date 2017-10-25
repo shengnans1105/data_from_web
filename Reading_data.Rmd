@@ -106,7 +106,7 @@ brfss =
   content("parsed")
 ```
 
-### Catch tge pokemon (data)
+### Catch the pokemon (data)
 
 ```{r}
 poke = GET("http://pokeapi.co/api/v2/pokemon/1") %>%
