@@ -81,3 +81,9 @@ toothbrush_df = data_frame(
 )
 ```
 
+
+##API
+
+### Water use data
+
+https://data.cityofnewyork.us/resource/waf7-5gvc.csv
